@@ -7,6 +7,7 @@ import { getApiImage } from "../../api";
 import Poster from "../Poster";
 import Votes from "../Votes";
 import { trimText } from "../../utils";
+import { useNavigation } from "@react-navigation/native";
 
 /*
 FIXME: 이 부분은 MoviesPresenter로 이전함
@@ -75,6 +76,16 @@ const ButtonText = styled.Text`
 `;
 
 const Slider = ({ id, title, backgroundImage, poster, votes, overview }) => {
+  const navigation = useNavigation();
+  const goToDetail = () =>
+    navigation.navigate("Detail", {
+      id,
+      title,
+      backgroundImage,
+      poster,
+      votes,
+      overview,
+    });
   return (
     <Container>
       <BackgroundImage
@@ -89,7 +100,7 @@ const Slider = ({ id, title, backgroundImage, poster, votes, overview }) => {
             <Votes votes={votes} />
           </VotesContainer>
           <OverView>{trimText(overview, 120)}</OverView>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={goToDetail}>
             <Button>
               <ButtonText>See detail</ButtonText>
             </Button>

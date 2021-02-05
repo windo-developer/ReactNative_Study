@@ -36,7 +36,7 @@ const TV = () => {
     getData();
   }, []);
 
-  return <TvPresenter {...shows} />;
+  return <TvPresenter refreshFn={getData} {...shows} />;
 };
 
 export default TV;

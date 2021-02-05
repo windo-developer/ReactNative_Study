@@ -1,5 +1,6 @@
 import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
@@ -20,12 +21,21 @@ const Title = styled.Text`
 `;
 
 const Vertical = ({ id, title, poster, votes }) => {
+  const navigation = useNavigation();
+  const goToDetail = () => {
+    navigation.navigate("Detail", {
+      id,
+      title,
+      poster,
+      votes,
+    });
+  };
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={goToDetail}>
       <Container>
         <Poster url={poster} />
         <Title>{trimText(title, 10)}</Title>
-        <Votes votes={votes} />
+        {votes > 0 && <Votes votes={votes} />}
       </Container>
     </TouchableOpacity>
   );

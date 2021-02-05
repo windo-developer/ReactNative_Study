@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "styled-components/native";
 import Horizontal from "../../components/Horizontal";
 
 import HorizontalSlider from "../../components/HorizontalSlider";
@@ -11,8 +11,8 @@ const Container = styled.View`
   margin-top: 30px;
 `;
 
-export default ({ loading, popular, topRated, today }) => (
-  <ScrollContainer loading={loading}>
+export default ({ loading, popular, topRated, today, refreshFn }) => (
+  <ScrollContainer loading={loading} refreshFn={refreshFn}>
     <Container>
       <HorizontalSlider title="Popular Shows">
         {popular.map((show) => (
