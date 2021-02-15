@@ -1,34 +1,52 @@
 import React from "react";
 import { useEffect, useState, useLayoutEffect } from "react";
+import * as WebBrowser from "expo-web-browser";
 
-import { movieApi } from "../../api";
+import { movieApi, tvApi } from "../../api";
 import DetailPresenter from "./DetailPresenter";
 
-export default ({
-  navigation,
-  route: {
-    params: { id, title, backgroundImage, poster, votes, overview },
-  },
-}) => {
-  const [movie, setMovie] = useState({
+const DetailContainer = ({ navigation, route }) => {
+  const {
     id,
     title,
     backgroundImage,
     poster,
     votes,
     overview,
+    isTv,
+  } = route.params;
+
+  const [detail, setDetail] = useState({
+    loading: true,
+    result: {
+      title,
+      backgroundImage,
+      poster,
+      overview,
+      votes,
+      videos: { result: [] },
+    },
   });
 
   const getData = async () => {
-    const [getMovie, getMovieError] = await movieApi.movie(id);
-    setMovie({
-      ...getMovie,
-      title: getMovie.title,
-      backgroundImage: getMovie.backdrop_path,
-      poster: getMovie.poster_path,
-      overview: getMovie.overview,
-      votes: getMovie.vote_average,
-    });
+    try {
+      const [getDetail, getDetailError] = isTv
+        ? await tvApi.show(id)
+        : await movieApi.movie(id);
+      setDetail({
+        loading: false,
+        result: {
+          ...getDetail,
+          title: getDetail.title || getDetail.name,
+          backgroundImage: getDetail.backdrop_path,
+          poster: getDetail.poster_path,
+          overview: getDetail.overview,
+          votes: getDetail.vote_average,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -39,5 +57,56 @@ export default ({
     navigation.setOptions({ title });
   });
 
-  return <DetailPresenter {...movie} />;
+  const openBrowser = async (url) => {
+    await WebBrowser.openBrowserAsync(url);
+  };
+
+  return <DetailPresenter openBrowser={openBrowser} {...detail} />;
 };
+
+export default DetailContainer;
+
+/*
+export default ({
+  navigation,
+  route: {
+    params: { id, title, backgroundImage, poster, votes, overview, isTv },
+  },
+}) => {
+  const [detail, setDetail] = useState({
+    loading: true,
+    result: { title, backgroundImage, poster, overview, votes },
+  });
+
+  const getData = async () => {
+    try {
+      const [getDetail, getDetailError] = isTv
+        ? await tvApi.show(id)
+        : await movieApi.movie(id);
+      setDetail({
+        loading: false,
+        result: {
+          ...getDetail,
+          title: getDetail.title || getDetail.name,
+          backgroundImage: getDetail.backdrop_path,
+          poster: getDetail.poster_path,
+          overview: getDetail.overview,
+          votes: getDetail.vote_average,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, [id]);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({ title });
+  });
+
+  return <DetailPresenter {...detail} />;
+};
+*/

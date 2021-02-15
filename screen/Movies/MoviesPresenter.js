@@ -58,6 +58,7 @@ const MoviesPresenter = ({
             {popular.map((movie) => (
               <Vertical
                 key={movie.id}
+                id={movie.id}
                 title={movie.title}
                 poster={movie.poster_path}
                 votes={movie.vote_average}

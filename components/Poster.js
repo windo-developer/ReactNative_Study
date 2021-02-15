@@ -12,7 +12,7 @@ const Image = styled.Image`
 // styled Image = resizeMode ={default: cover}
 const Poster = ({ url }) => <Image source={{ uri: getApiImage(url) }} />;
 
-Poster.protoType = {
+Poster.propTypes = {
   url: PropTypes.string.isRequired,
 };
 

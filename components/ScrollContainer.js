@@ -37,7 +37,7 @@ const ScrollContainer = ({
   );
 };
 
-ScrollContainer.PropTypes = {
+ScrollContainer.propTypes = {
   loading: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
   contentContainerStyle: PropTypes.object,

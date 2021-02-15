@@ -20,14 +20,16 @@ const Title = styled.Text`
   margin-bottom: 5px;
 `;
 
-const Vertical = ({ id, title, poster, votes }) => {
+const Vertical = ({ id, title, poster, votes, isTv = false }) => {
   const navigation = useNavigation();
   const goToDetail = () => {
     navigation.navigate("Detail", {
+      isTv,
       id,
       title,
       poster,
       votes,
+      // overview,
     });
   };
   return (
@@ -41,9 +43,9 @@ const Vertical = ({ id, title, poster, votes }) => {
   );
 };
 
-Vertical.protoType = {
+Vertical.propTypes = {
   id: PropTypes.number.isRequired,
-  poster: PropTypes.string.isRequired,
+  poster: PropTypes.string,
   title: PropTypes.string.isRequired,
   votes: PropTypes.number.isRequired,
 };

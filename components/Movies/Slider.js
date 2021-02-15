@@ -89,7 +89,7 @@ const Slider = ({ id, title, backgroundImage, poster, votes, overview }) => {
   return (
     <Container>
       <BackgroundImage
-        source={{ uri: getApiImage(backgroundImage) }}
+        source={{ uri: getApiImage(backgroundImage, "") }}
         resizeMode="cover"
       />
       <Content>
@@ -111,7 +111,7 @@ const Slider = ({ id, title, backgroundImage, poster, votes, overview }) => {
   );
 };
 
-Slider.protoType = {
+Slider.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   backgroundImage: PropTypes.string.isRequired,
