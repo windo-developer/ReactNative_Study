@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components";
 import PropTypes from "prop-types";

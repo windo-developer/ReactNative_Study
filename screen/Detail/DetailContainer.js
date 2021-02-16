@@ -29,24 +29,20 @@ const DetailContainer = ({ navigation, route }) => {
   });
 
   const getData = async () => {
-    try {
-      const [getDetail, getDetailError] = isTv
-        ? await tvApi.show(id)
-        : await movieApi.movie(id);
-      setDetail({
-        loading: false,
-        result: {
-          ...getDetail,
-          title: getDetail.title || getDetail.name,
-          backgroundImage: getDetail.backdrop_path,
-          poster: getDetail.poster_path,
-          overview: getDetail.overview,
-          votes: getDetail.vote_average,
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const [getDetail, getDetailError] = isTv
+      ? await tvApi.show(id)
+      : await movieApi.movie(id);
+    setDetail({
+      loading: false,
+      result: {
+        ...getDetail,
+        title: getDetail.title || getDetail.name,
+        backgroundImage: getDetail.backdrop_path,
+        poster: getDetail.poster_path,
+        overview: getDetail.overview,
+        votes: getDetail.vote_average,
+      },
+    });
   };
 
   useEffect(() => {

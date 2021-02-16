@@ -80,21 +80,21 @@ const DetailPresenter = ({ openBrowser, result, loading }) => {
             <Poster url={result.poster} />
             <Info>
               <Title>{result.title}</Title>
-              {result.votes && <Votes votes={result.votes} />}
+              {!!result.votes && <Votes votes={result.votes} />}
             </Info>
           </Container>
         </Header>
         <Data>
-          {result.overview ? (
+          {!!result.overview && (
             <>
               <DataName>Overview</DataName>
               <DataValue>{result.overview}</DataValue>
             </>
-          ) : null}
-          {loading ? (
-            <ActivityIndicator color="white" style={{ marginTop: 30 }} />
-          ) : null}
-          {result.spoken_languages && (
+          )}
+          {!!loading && (
+            <ActivityIndicator color={"white"} style={{ marginTop: 30 }} />
+          )}
+          {!!result.spoken_languages && (
             <>
               <DataName>Languages</DataName>
               <DataValue>
@@ -102,37 +102,37 @@ const DetailPresenter = ({ openBrowser, result, loading }) => {
               </DataValue>
             </>
           )}
-          {result.release_date ? (
+          {!!result.release_date && (
             <>
               <DataName>Release Date</DataName>
               <DataValue>{formatDate(result.release_date)}</DataValue>
             </>
-          ) : null}
-          {result.status ? (
+          )}
+          {!!result.status && (
             <>
               <DataName>Status</DataName>
               <DataValue>{result.status}</DataValue>
             </>
-          ) : null}
-          {result.runtime ? (
+          )}
+          {!!result.runtime && (
             <>
               <DataName>Runtime</DataName>
               <DataValue>{result.runtime} minutes</DataValue>
             </>
-          ) : null}
-          {result.revenue ? (
+          )}
+          {!!result.revenue && (
             <>
               <DataName>Revenue</DataName>
               <DataValue>{numberComma(result.revenue)} $</DataValue>
             </>
-          ) : null}
-          {result.first_air_date ? (
+          )}
+          {!!result.first_air_date && (
             <>
               <DataName>First Air Date</DataName>
               <DataValue>{formatDate(result.first_air_date)}</DataValue>
             </>
-          ) : null}
-          {result.genres ? (
+          )}
+          {!!result.genres && (
             <>
               <DataName>Genres</DataName>
               <DataValue>
@@ -143,16 +143,16 @@ const DetailPresenter = ({ openBrowser, result, loading }) => {
                 )}
               </DataValue>
             </>
-          ) : null}
-          {result.number_of_episodes ? (
+          )}
+          {!!result.number_of_episodes && (
             <>
               <DataName>Seasons / Episodes</DataName>
               <DataValue>
                 {result.number_of_seasons} / {result.number_of_episodes}
               </DataValue>
             </>
-          ) : null}
-          {result.imdb_id ? (
+          )}
+          {!!result.imdb_id && (
             <>
               <DataName>Links</DataName>
               <Link
@@ -161,21 +161,21 @@ const DetailPresenter = ({ openBrowser, result, loading }) => {
                 onPress={() =>
                   openBrowser(`https://www.imdb.com/title/${result.imdb_id}`)
                 }
-              ></Link>
+              />
             </>
-          ) : null}
-          {result.videos.result?.length > 0 && (
+          )}
+          {!!result.videos.results?.length > 0 && (
             <>
               <DataName>Videos</DataName>
-              {result.videos.result.map((video) => (
+              {result.videos.results.map((video) => (
                 <Link
                   key={video.id}
                   text={video.name}
-                  icon="youtube"
+                  icon="youtube-play"
                   onPress={() =>
                     openBrowser(`https://www.youtube.com/watch?v=${video.key}`)
                   }
-                ></Link>
+                />
               ))}
             </>
           )}
