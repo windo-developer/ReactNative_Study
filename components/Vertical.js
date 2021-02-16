@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import styled from "styled-components";
+import styled from "styled-components/native";
 import PropTypes from "prop-types";
 
 import Poster from "./Poster";

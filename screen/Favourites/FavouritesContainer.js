@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
-import { movieApi } from "../api";
+import React, { useState, useEffect } from "react";
 
-const Favourites = () => {
+import { movieApi } from "../../api";
+import FavouritesPresenter from "./FavouritesPresenter";
+
+const FavouritesContainer = () => {
   const [movies, setMovies] = useState({
     results: [],
     error: null,
@@ -18,11 +19,7 @@ const Favourites = () => {
     getData();
   }, []);
 
-  return (
-    <View>
-      <Text>{movies.results.length}</Text>
-    </View>
-  );
+  return <FavouritesPresenter {...movies} />;
 };
 
-export default Favourites;
+export default FavouritesContainer;
