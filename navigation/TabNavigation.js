@@ -13,7 +13,6 @@ const Tabs = createBottomTabNavigator();
 
 export default ({ navigation, route }) => {
   useLayoutEffect(() => {
-    // console.log(route);
     const headerName = getFocusedRouteNameFromRoute(route) ?? "Movies";
     navigation.setOptions({
       title: headerName,
@@ -47,6 +46,7 @@ export default ({ navigation, route }) => {
         style: {
           backgroundColor: "black",
           borderTopColor: "black",
+          borderTopWidth: 0,
         },
       }}
     >

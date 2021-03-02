@@ -1,5 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Ionicons } from "@expo/vector-icons";
 
 import TabNavigation from "./TabNavigation";
 import Detail from "../screen/Detail";
@@ -17,6 +18,9 @@ export default () => (
       },
       headerTintColor: "white",
       headerBackTitleVisible: false,
+      headerBackImage: () => (
+        <Ionicons name="md-arrow-back" color={"white"} size={26} />
+      ),
     }}
   >
     <Stack.Screen name="Tabs" component={TabNavigation} />
